@@ -15,6 +15,8 @@ public interface MainMVP {
 
         void showData(List<Movie> movies) ;
 
+        void showToastError();
+
     }
 
     interface Presenter {

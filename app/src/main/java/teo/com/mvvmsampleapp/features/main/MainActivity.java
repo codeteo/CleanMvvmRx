@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +78,11 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
         Timber.i("movies size: %d", movies.size());
 
         setDataToAdapter(movies);
+    }
+
+    @Override
+    public void showToastError() {
+        Toast.makeText(MainActivity.this, getString(R.string.error), Toast.LENGTH_SHORT).show();
     }
 
     private void setDataToAdapter(List<Movie> movies) {

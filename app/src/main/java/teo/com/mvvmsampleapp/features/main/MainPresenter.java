@@ -8,7 +8,6 @@ import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 import teo.com.mvvmsampleapp.data.entities.Movie;
 import teo.com.mvvmsampleapp.domain.GetMoviesUseCase;
-import timber.log.Timber;
 
 /**
  * Presenter for {@link MainActivity}
@@ -40,8 +39,8 @@ public class MainPresenter implements MainMVP.Presenter {
                             movies -> {
                                 view.showData(movies);
                                 moviesList.addAll(movies);
-                            },
-                           t -> Timber.i("error: %s", t.getStackTrace()));
+                                },
+                            t -> view.showToastError());
 
         subscriptions.add(subscription);
     }
