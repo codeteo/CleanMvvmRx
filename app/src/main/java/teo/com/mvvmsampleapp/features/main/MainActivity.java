@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,25 +29,57 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
     MoviesAdapter adapter;
 
+    private ArrayList<Movie> movieList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        if (savedInstanceState == null) {
+            initPresenter();
+            presenter.onLoadData();
+        } else {
+            if (savedInstanceState.getParcelableArrayList("movies") != null) {
+                movieList = new ArrayList<>();
+                movieList.addAll(savedInstanceState.getParcelableArrayList("movies"));
+                setDataToAdapter(movieList);
+                if (presenter == null) {
+                    initPresenter();
+                }
+                presenter.setMovieList(movieList);
+            } else {
+                if (presenter == null) {
+                    initPresenter();
+                }
+                presenter.onLoadData();
+            }
+        }
+    }
+
+    private void initPresenter() {
         DaggerMainComponent.builder()
                 .applicationComponent(MyApplication.getApplicationComponent())
                 .mainPresenterModule(new MainPresenterModule(this))
                 .build()
                 .inject(this);
+    }
 
-        presenter.onLoadData();
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("movies", presenter.getMovieList());
+        super.onSaveInstanceState(outState);
     }
 
     @Override
     public void showData(List<Movie> movies) {
         Timber.i("movies size: %d", movies.size());
 
+        setDataToAdapter(movies);
+    }
+
+    private void setDataToAdapter(List<Movie> movies) {
         adapter = new MoviesAdapter(movies);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvList.setLayoutManager(layoutManager);
@@ -56,6 +89,8 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.unsubscribe();
+        if (presenter != null) {
+            presenter.unsubscribe();
+        }
     }
 }

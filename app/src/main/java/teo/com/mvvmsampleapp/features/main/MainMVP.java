@@ -1,5 +1,6 @@
 package teo.com.mvvmsampleapp.features.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import teo.com.mvvmsampleapp.data.entities.Movie;
@@ -22,6 +23,9 @@ public interface MainMVP {
 
         void unsubscribe();
 
+        ArrayList<Movie> getMovieList();
+
+        void setMovieList(ArrayList<Movie> movieList);
     }
 
 }
