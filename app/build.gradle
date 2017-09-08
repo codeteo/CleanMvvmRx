@@ -12,19 +12,90 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        applicationVariants.all { variant ->
+            variant.buildConfigField "String", "API_KEY", "\"" + getApiKey() + "\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+def getApiKey(){
+    Properties props = new Properties()
+    props.load(new FileInputStream(new File('secrets.properties')))
+    return props['API_KEY']
+}
+
+project.ext {
+    supportLibraryVersion = "26.0.2"
+    daggerVersion = "2.11"
+    butterKnifeVersion = "8.5.1"
+    retrofitVersion = "2.1.0"
+    rxJavaVersion = '1.2.4'
+    rxAndroidVersion = '1.2.1'
+    rxBindingsVersion = '1.0.1'
+    picassoVersion = '2.5.2'
+    stethoVersion = '1.5.0'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.0.2'
+    implementation "com.android.support:appcompat-v7:$project.supportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "com.android.support:recyclerview-v7:$project.supportLibraryVersion"
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    androidTestImplementation 'com.android.support.test:runner:1.0.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
+
+    // Dagger core
+    annotationProcessor "com.google.dagger:dagger-compiler:$project.daggerVersion"
+    implementation "com.google.dagger:dagger:$project.daggerVersion"
+
+    // Dagger Android
+    annotationProcessor "com.google.dagger:dagger-android-processor:$project.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$project.daggerVersion"
+    // if you are not using support library, include this instead
+    implementation "com.google.dagger:dagger-android:$project.daggerVersion"
+
+    // ButterKnife
+    implementation "com.jakewharton:butterknife:$project.butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$project.butterKnifeVersion"
+
+    // Networking
+    implementation "com.squareup.okhttp3:okhttp:3.4.1"
+    implementation "com.google.code.gson:gson:2.7"
+    implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:2.1.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.5.0"
+
+    // Rx
+    implementation "io.reactivex:rxandroid:$project.rxAndroidVersion"
+    implementation "io.reactivex:rxjava:$project.rxJavaVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$project.retrofitVersion"
+    implementation "com.jakewharton.rxbinding:rxbinding:$project.rxBindingsVersion"
+
+    //Google AutoValue
+    provided "com.google.auto.value:auto-value:1.3"
+    annotationProcessor "com.google.auto.value:auto-value:1.3"
+    annotationProcessor "com.ryanharter.auto.value:auto-value-parcel:0.2.5"
+    annotationProcessor "com.ryanharter.auto.value:auto-value-gson:0.5.0"
+    provided "com.ryanharter.auto.value:auto-value-gson:0.5.0"
+    annotationProcessor "com.gabrielittner.auto.value:auto-value-with:1.0.0"
+
+    // Utilities
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+    implementation "com.squareup.picasso:picasso:$project.picassoVersion"
+
+    // Stetho
+    implementation "com.facebook.stetho:stetho:$project.stethoVersion"
+    implementation "com.facebook.stetho:stetho-okhttp3:$project.stethoVersion"
+
+    // Permissions
+    implementation 'pub.devrel:easypermissions:0.4.3'
 }
