@@ -20,6 +20,8 @@ public interface MainMVP {
 
         void onLoadData();
 
+        void unsubscribe();
+
     }
 
 }

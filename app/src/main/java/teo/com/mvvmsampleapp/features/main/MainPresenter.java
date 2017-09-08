@@ -2,6 +2,8 @@ package teo.com.mvvmsampleapp.features.main;
 
 import javax.inject.Inject;
 
+import rx.Subscription;
+import rx.subscriptions.CompositeSubscription;
 import teo.com.mvvmsampleapp.domain.GetMoviesUseCase;
 import timber.log.Timber;
 
@@ -14,6 +16,8 @@ public class MainPresenter implements MainMVP.Presenter {
     private MainMVP.View view;
     private GetMoviesUseCase moviesUseCase;
 
+    private CompositeSubscription subscriptions;
+
     @Inject
     MainPresenter(MainMVP.View view, GetMoviesUseCase moviesUseCase) {
         this.view = view;
@@ -22,9 +26,22 @@ public class MainPresenter implements MainMVP.Presenter {
 
     @Override
     public void onLoadData() {
-        moviesUseCase.getMovies()
-                .subscribe(
-                        movies -> view.showData(movies),
-                        t -> Timber.i("error: %s", t.getStackTrace()));
+        subscriptions = new CompositeSubscription();
+
+        Subscription subscription =
+                moviesUseCase.getMovies()
+                    .subscribe(
+                            movies -> view.showData(movies),
+                           t -> Timber.i("error: %s", t.getStackTrace()));
+
+        subscriptions.add(subscription);
     }
+
+    @Override
+    public void unsubscribe() {
+        if (subscriptions.hasSubscriptions()) {
+            subscriptions.clear();
+        }
+    }
+
 }

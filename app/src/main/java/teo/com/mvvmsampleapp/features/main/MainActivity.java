@@ -52,4 +52,10 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
         rvList.setLayoutManager(layoutManager);
         rvList.setAdapter(adapter);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.unsubscribe();
+    }
 }
