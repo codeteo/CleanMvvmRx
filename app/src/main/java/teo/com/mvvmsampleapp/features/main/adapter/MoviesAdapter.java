@@ -11,8 +11,6 @@ import java.util.List;
 import teo.com.mvvmsampleapp.R;
 import teo.com.mvvmsampleapp.data.entities.Movie;
 import teo.com.mvvmsampleapp.features.main.MainActivity;
-import teo.com.mvvmsampleapp.features.main.MovieViewHolder;
-import teo.com.mvvmsampleapp.features.main.MovieViewModel;
 
 /**
  * Adapter class for list of movies in {@link MainActivity}

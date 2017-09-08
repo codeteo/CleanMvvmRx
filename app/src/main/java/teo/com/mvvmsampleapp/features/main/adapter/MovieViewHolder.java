@@ -1,4 +1,4 @@
-package teo.com.mvvmsampleapp.features.main;
+package teo.com.mvvmsampleapp.features.main.adapter;
 
 import android.view.View;
 import android.widget.TextView;
@@ -6,10 +6,9 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import teo.com.mvvmsampleapp.R;
-import teo.com.mvvmsampleapp.features.main.adapter.BaseViewHolder;
 
 /**
- * View holder for the movie item
+ * View holder for the movie item.
  */
 
 public class MovieViewHolder extends BaseViewHolder<MovieViewModel> {
@@ -17,7 +16,7 @@ public class MovieViewHolder extends BaseViewHolder<MovieViewModel> {
     @BindView(R.id.tv_title) TextView tvTitle;
     @BindView(R.id.tv_overview) TextView tvOverview;
 
-    public MovieViewHolder(View itemView) {
+    MovieViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
     }

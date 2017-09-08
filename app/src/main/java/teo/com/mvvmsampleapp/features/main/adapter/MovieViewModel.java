@@ -1,6 +1,7 @@
-package teo.com.mvvmsampleapp.features.main;
+package teo.com.mvvmsampleapp.features.main.adapter;
 
 import teo.com.mvvmsampleapp.data.entities.Movie;
+import teo.com.mvvmsampleapp.features.main.MainActivity;
 
 /**
  * ViewModel for the list of movies in {@link MainActivity}
