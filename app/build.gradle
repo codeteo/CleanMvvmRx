@@ -27,7 +27,6 @@ android {
     }
     dexOptions {
         javaMaxHeapSize "5g"
-        preDexLibraries = false
     }
 }
 
@@ -48,7 +47,6 @@ project.ext {
     picassoVersion = '2.5.2'
     stethoVersion = '1.5.0'
     mockitoVersion = '1.10.19'
-    leakCanaryVersion = '1.5.2'
 }
 
 dependencies {
@@ -62,7 +60,7 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
     androidTestImplementation 'com.android.support.test:runner:1.0.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
-    androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.5.0'
+    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:3.5.0'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.5.0'
 
     // Dagger core
@@ -110,8 +108,4 @@ dependencies {
 
     // Permissions
     implementation 'pub.devrel:easypermissions:0.4.3'
-
-    // Leak canary
-    debugCompile "com.squareup.leakcanary:leakcanary-android:$project.leakCanaryVersion"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$project.leakCanaryVersion"
 }

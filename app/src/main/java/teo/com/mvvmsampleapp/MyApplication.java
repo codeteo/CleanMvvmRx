@@ -2,8 +2,6 @@ package teo.com.mvvmsampleapp;
 
 import android.app.Application;
 
-import com.squareup.leakcanary.LeakCanary;
-
 import teo.com.mvvmsampleapp.dagger.components.ApplicationComponent;
 import teo.com.mvvmsampleapp.dagger.components.DaggerApplicationComponent;
 import teo.com.mvvmsampleapp.dagger.modules.ApplicationModule;
@@ -24,7 +22,6 @@ public class MyApplication extends Application {
         if (BuildConfig.DEBUG) {
             Timber.plant(new DebugTree());
         }
-        LeakCanary.install(this);
 
         applicationComponent = DaggerApplicationComponent
                 .builder()

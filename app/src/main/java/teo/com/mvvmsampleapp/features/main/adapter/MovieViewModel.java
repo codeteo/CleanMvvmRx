@@ -23,4 +23,7 @@ public final class MovieViewModel {
         return movie.getOverview();
     }
 
+    public String getImageUrl() {
+        return movie.getBackdropPath();
+    }
 }
