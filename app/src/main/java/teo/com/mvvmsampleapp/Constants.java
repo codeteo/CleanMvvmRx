@@ -12,7 +12,6 @@ public final class Constants {
 
     /** images url**/
     public static final String BASE_IMAGE_URL = "http://image.tmdb.org/t/p/";
-    public static final String URL_PART_IMAGE_SIZE = "w185";
     public final static String IMAGE_SIZE_W185 = "w185/";
     public final static String IMAGE_SIZE_W342 = "w342/";
     public final static String IMAGE_SIZE_W500 = "w500/";
@@ -20,6 +19,6 @@ public final class Constants {
 
     public static String appendImageUrl(String imgUrl) {
         if (imgUrl == null) return null;
-        return BASE_IMAGE_URL + imgUrl;
+        return BASE_IMAGE_URL + IMAGE_SIZE_W780 + imgUrl;
     }
 }

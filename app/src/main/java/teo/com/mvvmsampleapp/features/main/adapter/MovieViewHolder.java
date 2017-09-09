@@ -18,8 +18,7 @@ import teo.com.mvvmsampleapp.R;
 
 public class MovieViewHolder extends BaseViewHolder<MovieViewModel> {
 
-    @BindView(R.id.tv_title) TextView tvTitle;
-    @BindView(R.id.tv_overview) TextView tvOverview;
+    @BindView(R.id.tv_movie_title) TextView tvTitle;
     @BindView(R.id.iv_movie_image) ImageView ivPoster;
 
     private final Context context;
@@ -34,7 +33,6 @@ public class MovieViewHolder extends BaseViewHolder<MovieViewModel> {
     @Override
     public void setViewModel(MovieViewModel viewModel) {
         tvTitle.setText(viewModel.getTitle());
-        tvOverview.setText(viewModel.getOverview());
 
         Picasso.with(context)
                 .load(Constants.appendImageUrl(viewModel.getImageUrl()))
