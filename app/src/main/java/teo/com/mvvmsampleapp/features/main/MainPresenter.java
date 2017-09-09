@@ -39,7 +39,7 @@ public class MainPresenter implements MainMVP.Presenter {
                             movies -> {
                                 view.showData(movies);
                                 moviesList.addAll(movies);
-                                },
+                            },
                             t -> view.showToastError());
 
         subscriptions.add(subscription);
@@ -47,7 +47,7 @@ public class MainPresenter implements MainMVP.Presenter {
 
     @Override
     public void unsubscribe() {
-        if (subscriptions!=null && subscriptions.hasSubscriptions()) {
+        if (subscriptions != null && subscriptions.hasSubscriptions()) {
             subscriptions.clear();
         }
     }

@@ -13,7 +13,7 @@ public interface MainMVP {
 
     interface View {
 
-        void showData(List<Movie> movies) ;
+        void showData(List<Movie> movies);
 
         void showToastError();
 

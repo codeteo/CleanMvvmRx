@@ -42,7 +42,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    OkHttpClient providesOkHttpClient(BaseUrlInterceptor baseUrlInterceptor){
+    OkHttpClient providesOkHttpClient(BaseUrlInterceptor baseUrlInterceptor) {
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

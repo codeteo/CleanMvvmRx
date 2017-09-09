@@ -38,7 +38,7 @@ public class MoviesRemoteDataSource implements MoviesDataSource {
 
                     List<Movie> movies = new ArrayList<>();
 
-                    for (MoviesNestedItemResponse nestedItemResponse: moviesResponse.getResults()){
+                    for (MoviesNestedItemResponse nestedItemResponse: moviesResponse.getResults()) {
                         movies.add(new MovieMapper().from(nestedItemResponse));
                     }
 

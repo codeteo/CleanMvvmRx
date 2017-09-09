@@ -23,6 +23,8 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
+    private static final String SAVED_MOVIES_KEY = "movies";
+
     @BindView(R.id.rv_list) RecyclerView rvList;
 
     @Inject
@@ -42,9 +44,9 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
             initPresenter();
             presenter.onLoadData();
         } else {
-            if (savedInstanceState.getParcelableArrayList("movies") != null) {
+            if (savedInstanceState.getParcelableArrayList(SAVED_MOVIES_KEY) != null) {
                 movieList = new ArrayList<>();
-                movieList.addAll(savedInstanceState.getParcelableArrayList("movies"));
+                movieList.addAll(savedInstanceState.getParcelableArrayList(SAVED_MOVIES_KEY));
                 setDataToAdapter(movieList);
                 if (presenter == null) {
                     initPresenter();
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList("movies", presenter.getMovieList());
+        outState.putParcelableArrayList(SAVED_MOVIES_KEY, presenter.getMovieList());
         super.onSaveInstanceState(outState);
     }
 

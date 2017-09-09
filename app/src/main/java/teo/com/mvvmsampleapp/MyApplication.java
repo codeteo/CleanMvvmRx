@@ -14,7 +14,7 @@ import timber.log.Timber.DebugTree;
  * Main class of the app.
  */
 
-public class MyApplication extends Application{
+public class MyApplication extends Application {
 
     private static ApplicationComponent applicationComponent;
 

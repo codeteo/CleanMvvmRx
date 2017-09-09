@@ -32,7 +32,7 @@ public class MoviesRepositoryModule {
     @ActivityScope
     @Provides
     MoviesDataSource providesRemoteDataSource(MoviesService service,
-                                                    BaseSchedulerProvider schedulerProvider, @Named("Api-Key") String apiKey) {
+                                    BaseSchedulerProvider schedulerProvider, @Named("Api-Key") String apiKey) {
         return new MoviesRemoteDataSource(service, schedulerProvider, apiKey);
     }
 

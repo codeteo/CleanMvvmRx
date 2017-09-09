@@ -31,7 +31,7 @@ public abstract class Movie implements Parcelable {
     }
 
     @AutoValue.Builder
-    public static abstract class Builder {
+    public abstract static class Builder {
         public abstract Builder id(String id);
         public abstract Builder title(String title);
         public abstract Builder overview(String overview);
