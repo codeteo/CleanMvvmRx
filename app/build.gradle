@@ -24,6 +24,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    dexOptions {
+        javaMaxHeapSize "5g"
+        preDexLibraries = false
+    }
 }
 
 def getApiKey(){
@@ -43,6 +47,7 @@ project.ext {
     picassoVersion = '2.5.2'
     stethoVersion = '1.5.0'
     mockitoVersion = '1.10.19'
+    leakCanaryVersion = '1.5.2'
 }
 
 dependencies {
@@ -104,4 +109,8 @@ dependencies {
 
     // Permissions
     implementation 'pub.devrel:easypermissions:0.4.3'
+
+    // Leak canary
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$project.leakCanaryVersion"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$project.leakCanaryVersion"
 }
