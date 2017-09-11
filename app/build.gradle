@@ -108,4 +108,7 @@ dependencies {
 
     // Permissions
     implementation 'pub.devrel:easypermissions:0.4.3'
+
+    // Palette
+    implementation "com.android.support:palette-v7:$project.supportLibraryVersion"
 }
